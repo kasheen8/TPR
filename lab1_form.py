@@ -14,6 +14,40 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
+        MainWindow.setStyleSheet("QWidget {\n"
+                                 " background-color:#b6d8d5;\n"
+                                 "}\n"
+                                 "\n"
+                                 "QTableWidget {\n"
+                                 " background-color:#ffffff;\n"
+                                 " font-weight: bold;\n"
+                                 " border: 2px solid black;\n"
+                                 " color: black;\n"
+                                 "}\n"
+                                 "\n"
+                                 "QSpinBox {\n"
+                                 " background-color:#ffffff;\n"
+                                 "}\n"
+                                 "\n"
+                                 "QLineEdit {\n"
+                                 " background-color:#ffffff;\n"
+                                 " border: 1px solid black;\n"
+                                 "}\n"
+                                 "\n"
+                                 "QTabWidget {\n"
+                                 " color: #000000;\n"
+                                 " border: 1px solid black;\n"
+                                 "}\n"
+                                 "QComboBox {\n"
+                                 "background-color:#ffffff;\n"
+                                 "}\n"
+                                 "QComboBox::drop-down {\n"
+                                 " border-width: 0px;}\n"
+                                 "QComboBox::drop-arrow{\n"
+                                 "image:url(noimg);\n"
+                                 "borider-width:0px;}"
+                                 "\n"
+                                 )
         MainWindow.setMinimumSize(QtCore.QSize(800, 600))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -128,8 +162,8 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.comboBox.setFont(font)
         self.comboBox.setObjectName("comboBox")
-        self.comboBox.addItems(["Включение","Дополнение","Обратное","Пересечение","Объединение",
-                               "Произведение","Двойственности"])
+        self.comboBox.addItems(["Включение","Дополнение","Обратное","Двойственности",
+                                "Пересечение","Объединение","Произведение"])
         self.tableWidget_3 = QtWidgets.QTableWidget(self.tab_2)
         self.tableWidget_3.setGeometry(QtCore.QRect(420, 80, 301, 201))
         font = QtGui.QFont()
