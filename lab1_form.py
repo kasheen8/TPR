@@ -29,8 +29,19 @@ class Ui_MainWindow(object):
                                  " background-color:#ffffff;\n"
                                  "}\n"
                                  "\n"
+                                 "QPushButton {\n"
+                                 "background-color:#ffffff\n"
+                                 "}\n"
+                                 "\n"
                                  "QLineEdit {\n"
                                  " background-color:#ffffff;\n"
+                                 " color:#000000;\n"
+                                 " border: 1px solid black;\n"
+                                 "}\n"
+                                 "\n"
+                                 "QTextEdit {\n"
+                                 " background-color:#ffffff;\n"
+                                 " color:#000000;\n"
                                  " border: 1px solid black;\n"
                                  "}\n"
                                  "\n"
@@ -60,7 +71,7 @@ class Ui_MainWindow(object):
         self.tab.setMinimumSize(QtCore.QSize(800, 600))
         self.tab.setObjectName("tab")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.tab)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(130, 120, 501, 371))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(130, 120, 500, 370))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -184,12 +195,13 @@ class Ui_MainWindow(object):
         self.tableWidget_3.verticalHeader().setCascadingSectionResizes(True)
         self.tableWidget_3.verticalHeader().setDefaultSectionSize(40)
         self.tableWidget_3.setEnabled(False)
+        self.tableWidget_3.hide()
         self.tableWidget_4 = QtWidgets.QTableWidget(self.tab_2)
         self.tableWidget_4.setEnabled(False)
         self.tableWidget_4.setGeometry(QtCore.QRect(240, 320, 301, 201))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
-        font.setPointSize(12)
+        font.setPointSize(16)
         font.setBold(True)
         font.setWeight(75)
         self.tableWidget_4.setFont(font)
@@ -295,21 +307,23 @@ class Ui_MainWindow(object):
         self.lineEdit.setGeometry(QtCore.QRect(590, 180, 31, 20))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
-        font.setPointSize(12)
+        font.setPointSize(18)
         font.setBold(True)
         font.setWeight(75)
         self.lineEdit.setFont(font)
         self.lineEdit.setObjectName("lineEdit")
+        self.lineEdit.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.lineEdit_2 = QtWidgets.QLineEdit(self.tab_3)
         self.lineEdit_2.setEnabled(False)
         self.lineEdit_2.setGeometry(QtCore.QRect(590, 360, 31, 20))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
-        font.setPointSize(12)
+        font.setPointSize(18)
         font.setBold(True)
         font.setWeight(75)
         self.lineEdit_2.setFont(font)
         self.lineEdit_2.setObjectName("lineEdit_2")
+        self.lineEdit_2.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.tabWidget.addTab(self.tab_3, "")
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
@@ -414,6 +428,7 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.textEdit.setFont(font)
         self.textEdit.setObjectName("textEdit")
+        self.textEdit.hide()
         self.tabWidget.addTab(self.tab_4, "")
         MainWindow.setCentralWidget(self.centralwidget)
 
