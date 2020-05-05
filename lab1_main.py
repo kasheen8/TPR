@@ -36,6 +36,11 @@ def table_value_set(self,table_matrix, table, size=5):
             table.setItem(row,column, QtWidgets.QTableWidgetItem(f'{int(table_matrix[row][column])}'))
 
 
+
+
+
+
+
 class mywindow(QtWidgets.QMainWindow): #класс приложения
     def __init__(self):
         super(mywindow, self).__init__()
@@ -47,6 +52,15 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
         self.ui.pushButton_2.clicked.connect(self.btn2)
         self.ui.pushButton_3.clicked.connect(self.btn3)
         self.ui.pushButton_4.clicked.connect(self.btn4)
+        self.ui.checkBox.stateChanged.connect(lambda: self.clear_textedit(self.ui.checkBox, self.ui.textEdit))
+        self.ui.checkBox_2.stateChanged.connect(lambda: self.clear_textedit(self.ui.checkBox_2, self.ui.textEdit))
+        self.ui.checkBox_3.stateChanged.connect(lambda: self.clear_textedit(self.ui.checkBox_3, self.ui.textEdit))
+        self.ui.checkBox_4.stateChanged.connect(lambda: self.clear_textedit(self.ui.checkBox_4, self.ui.textEdit))
+        self.ui.checkBox_5.stateChanged.connect(lambda: self.clear_textedit(self.ui.checkBox_5, self.ui.textEdit))
+        self.ui.checkBox_6.stateChanged.connect(lambda: self.clear_textedit(self.ui.checkBox_6, self.ui.textEdit))
+        self.ui.checkBox_7.stateChanged.connect(lambda: self.clear_textedit(self.ui.checkBox_7, self.ui.textEdit))
+
+
 
     def btn1(self):
         table = self.ui.tableWidget
@@ -56,8 +70,6 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
         table.setColumnCount(spinBox_value)
         table.setRowCount(spinBox_value)
         table.clear()
-        print(table.width() // spinBox_value)
-        print(table.height() // spinBox_value)
         for i in range(spinBox_value):
             table.setColumnWidth(i, table.width() // spinBox_value)
             table.setRowHeight(i,table.height() // spinBox_value)
@@ -123,13 +135,61 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
             self.ui.lineEdit_2.setText('-')
 
     def btn4(self):
-        self.ui.textEdit.hide()
+        textEdit = self.ui.textEdit
+        table6 = self.ui.tableWidget_6
         list_of_checkboxes = [self.ui.checkBox, self.ui.checkBox_2, self.ui.checkBox_3, self.ui.checkBox_4,
                             self.ui.checkBox_5, self.ui.checkBox_6, self.ui.checkBox_7]
         list_of_properties = [math_module_lab1.reflexivity,math_module_lab1.antireflexivity,math_module_lab1.symmetry,
                               math_module_lab1.asymmetry,math_module_lab1.antisymmetry,math_module_lab1.transitivity,
                               math_module_lab1.acyclicity_graph]
-        #index_property = [x for x in list_of_checkboxes if x.isChecked()]
+        index_property = [i for i in range(len(list_of_checkboxes)) if list_of_checkboxes[i].isChecked()]
+
+        if textEdit.isVisible():
+            textEdit.setText(' ')
+        if len(index_property) == 0:
+            textEdit.clear()
+            table6.clear()
+            return False
+        elif 0 in index_property and 1 in index_property:
+            textEdit.show()
+            textEdit.setText("Рефлексивность и антирефлексивность несовместимы!")
+            return False
+        elif 2 in index_property and 3 in index_property:
+            textEdit.show()
+            textEdit.setText("Симметричность и асимметричность несовместимы!")
+            return False
+        elif 2 in index_property and 4 in index_property:
+            textEdit.show()
+            textEdit.setText("Симметричность и антисимметричность несовместимы!")
+            return False
+        elif 0 in index_property and 6 in index_property :
+            textEdit.show()
+            textEdit.setText("Рефлексивность и ацикличность несовместимы!")
+            return False
+        elif 0 in index_property and 3 in index_property :
+            textEdit.show()
+            textEdit.setText("Рефлексивность и асимметричность несовместимы!")
+            return False
+        elif 2 in index_property and 6 in index_property :
+            result_matrix = np.zeros((5,5))
+            table_value_set(self,result_matrix,table6)
+            return True
+
+        success_matrix = False
+        while not success_matrix:
+            result_matrix = math_module_lab1.random_bin_matrix(5)
+            print(result_matrix)
+            success_matrix = True
+            for i in index_property:
+                if not list_of_properties[i](result_matrix):
+                    success_matrix = False
+                    break
+        table_value_set(self, result_matrix, table6)
+        textEdit.setText('Матрица сгенерирована')
+
+    def clear_textedit(self, qcheckbox, qtextedit):
+        self.ui.tableWidget_6.clear()
+        qtextedit.clear()
 
 
 

@@ -165,7 +165,7 @@ def acyclicity_graph(matrix): #проверка отношения на ацик
 
 
 if __name__ == '__main__':
-    matr = random_bin_matrix(4)
+    matr = random_bin_matrix(5)
     # print(matr)
     # print(matr[:])
     # print(composition(matr,matr))
@@ -184,8 +184,8 @@ if __name__ == '__main__':
     # print(composition(matrix1,matrix2))
     # print(duality(matr))
     while(True):
-       if (acyclicity_graph(matr) and asymmetry(matr)):
+       if (symmetry(matr) and acyclicity_graph(matr) and transitivity(matr)):
            break
-       matr = random_bin_matrix(4)
+       matr = random_bin_matrix(5)
        print(matr)
 
