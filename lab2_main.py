@@ -23,6 +23,29 @@ def combobox_table_added(table,spinBox_value):
             combobox.setFont(font)
             table.setCellWidget(i, j, combobox)
 
+def lineedit_validator_table_added(table,spinBox_value):
+    for i in range(spinBox_value):
+        for j in range(spinBox_value):
+            lineedit = QtWidgets.QLineEdit()
+            lineedit.setStyleSheet('background-color: #FFFFFF;\n color: #000000;')
+            font = QtGui.QFont()
+            font.setFamily("Times New Roman")
+            font.setPointSize(12)
+            font.setBold(True)
+            font.setWeight(75)
+            if i==j:
+                lineedit.setText('∞')
+                lineedit.setEnabled(False)
+            else:
+                lineedit.setValidator(QtGui.QIntValidator(0,99,parent = None))
+                Communications = np.random.randint(2)
+                if Communications:
+                    lineedit.setText(str(np.random.randint(100)))
+                else:
+                    lineedit.setText('0')
+            lineedit.setFont(font)
+            table.setCellWidget(i, j, lineedit)
+
 def table_value_get(table,size=5):
     table_matrix = np.empty((size,size))
     for i in range(size):
@@ -91,7 +114,7 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
         for i in range(spinBox_value):
             table.setColumnWidth(i, table.width() // spinBox_value)
             table.setRowHeight(i, table.height() // spinBox_value)
-        combobox_table_added(table, spinBox_value)
+        lineedit_validator_table_added(table, spinBox_value)
 
 
 
