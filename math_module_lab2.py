@@ -59,7 +59,7 @@ def iter_pow_of_order_k(row, pk):
     return iter_pow
 
 
-def odject_pow(matrix):
+def object_pow(matrix):
     size = len(matrix)
     pow_list = []
     for i in range(size):
@@ -74,10 +74,6 @@ def odject_pow(matrix):
         iter_pow_sum += pow_list[i]['pk']
     for i in range(size):
         pow_list[i]['iter_pow'] = pow_list[i]['pk'] / iter_pow_sum
-        print(pow_list[i]['num'])
-        print(pow_list[i]['pk'])
-        print(pow_list[i]['iter_pow'])
-    print(pow_list)
     return pow_list
 
 def list_of_outbox(matrix):
@@ -92,7 +88,12 @@ def list_of_outbox(matrix):
         record['num'] = row+1
         record['sum'] = sum
         outbox_list.append(record)
-    print(outbox_list)
+    sum_outbox = 0
+    for i in range(size):
+        sum_outbox += outbox_list[i]['sum']
+    for i in range(size):
+        outbox_list[i]['share'] = outbox_list[i]['sum'] / sum_outbox
+    return(outbox_list)
 
 
 def list_of_inbox(matrix):
@@ -107,7 +108,66 @@ def list_of_inbox(matrix):
         record['num'] = j+1
         record['sum'] = sum
         inbox_list.append(record)
-    print(inbox_list)
+    sum_inbox = 0
+    for i in range(size):
+        sum_inbox += inbox_list[i]['sum']
+    for i in range(size):
+        inbox_list[i]['share'] = inbox_list[i]['sum'] / sum_inbox
+    return(inbox_list)
+
+def comb_to_bin(comb_list):
+    size = len(comb_list)
+    bin_list = []
+    for i in range(size):
+        elem = ['0','0','0']
+        if 'X1' in comb_list[i]:
+            elem[0] = '1'
+        if 'X2' in comb_list[i]:
+            elem[1] = '1'
+        if 'X3' in comb_list[i]:
+            elem[2] = '1'
+        elem = ''.join(elem)
+        bin_list.append(elem)
+    return bin_list
+
+def bin_result(bin_list):
+    if bin_list.count('1') == 0:
+        return '0'
+    elif bin_list.count('1') == 4:
+        return '1'
+    elif bin_list.count('1') == 1:
+        if bin_list == ['0', '0', '0', '1']:
+            return '+∧+'
+        elif bin_list == ['0','0','1','0']:
+            return '+∧-'
+        elif bin_list == ['0','1','0','0']:
+            return '-∧+'
+        elif bin_list == ['1','0','0','0']:
+            return '-∧-'
+    elif bin_list.count('1') == 3:
+        if bin_list == ['1','1','1','0']:
+            return '-∨-'
+        if bin_list == ['1','1','0','1']:
+            return '-∨+'
+        if bin_list == ['1','0','1','1']:
+            return '+∨-'
+        if bin_list == ['0','1','1','1']:
+            return '+∨+'
+    elif bin_list.count('1') == 2:
+        if bin_list == ['1','1','0','0']:
+            return '(-∧+)∨(-∧-)'
+        if bin_list == ['1','0','0','1']:
+            return '(+∧+)∨(-∧-)'
+        if bin_list == ['1','0','1','0']:
+            return '(+∧-)∨(-∧-)'
+        if bin_list == ['0','0','1','1']:
+            return '(+∧-)∨(+∧+)'
+        if bin_list == ['0','1','1','0']:
+            return '(+∧-)∨(-∧+)'
+        if bin_list == ['0','1','0','1']:
+            return '(+∧+)∨(-∧+)'
+
+
 
 
 
@@ -123,6 +183,6 @@ if __name__ == '__main__':
     # print(set_of_majorant(matrix))
     # print(set_of_minorant(matrix))
     print(iter_pow_of_order_k(matrix[0],1), iter_pow_of_order_k(matrix[1],1),iter_pow_of_order_k(matrix[2],1),iter_pow_of_order_k(matrix[3],1))
-    odject_pow(matrix)
-    list_of_outbox(matrix)
+    object_pow(matrix)
+    print(list_of_outbox(matrix))
     list_of_inbox(matrix)
