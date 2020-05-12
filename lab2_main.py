@@ -4,12 +4,11 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QSize, Qt
 import numpy as np
-import math
 from lab2_form import Ui_MainWindow
 import math_module_lab2
 
 
-def combobox_table_added(table,spinBox_value):
+def combobox_table_added(table,spinBox_value): #добавление компобоксов в таблицу
     for i in range(spinBox_value):
         for j in range(spinBox_value):
             combobox = QtWidgets.QComboBox()
@@ -47,7 +46,7 @@ def lineedit_validator_table_added(table,spinBox_value):
             lineedit.setFont(font)
             table.setCellWidget(i, j, lineedit)
 
-def table_value_get(table,size=5):
+def table_value_get(table,size=5): #записывает значение таблицы из комбобоксов в массив
     table_matrix = np.empty((size,size))
     for i in range(size):
         for j in range(size):
@@ -64,25 +63,25 @@ def table_value_get_lineedit(table,size=5):
                 table_matrix[i][j] = 0
     return table_matrix
 
-def table_value_set(self,table_matrix, table, size=5):
+def table_value_set(self,table_matrix, table, size=5): #записывает значение из массива в таблицу
     for row in range(size):
         for column in range(size):
             table.setItem(row,column, QtWidgets.QTableWidgetItem(f'{int(table_matrix[row][column])}'))
 
-def lineEdit_set(self,line_edit,array):
+def lineEdit_set(self,line_edit,array): #замена в списке скобок для вывода на экран
     set_string = str(array)
     set_string = set_string.replace('[','{')
     set_string = set_string.replace(']','}')
     line_edit.setText(set_string)
 
-def two_column_table_set(table):
+def two_column_table_set(table): #заполнение первых двух колонок таблицы истинности
     first_column_list = ['0', '0', '1', '1']
     second_column_list = ['0', '1', '0', '1']
     for i in range(4):
         table.setItem(i, 0, QtWidgets.QTableWidgetItem(f'{first_column_list[i]}'))
         table.setItem(i, 1, QtWidgets.QTableWidgetItem(f'{second_column_list[i]}'))
 
-def logical_form(table):
+def logical_form(table): #вычисление значений для таблицы истинности
     bin_list = []
     for i in range(4):
         bin_list.append(table.item(i,2).text())
@@ -151,7 +150,7 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
             self.ui.tableWidget_6.setCellWidget(i, 1, combobox)
         self.ui.pushButton_5.clicked.connect(self.btn5)
 
-    def btn1(self):
+    def btn1(self): #активируется при нажатии button
         table = self.ui.tableWidget
         spinBox_value = self.ui.spinBox.value()
         table.setColumnCount(0)
@@ -165,7 +164,7 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
         combobox_table_added(table, spinBox_value)
 
 
-    def btn3(self):
+    def btn3(self): #активируется при нажатии button_3
         table = self.ui.tableWidget
         spinBox_value = self.ui.spinBox.value()
         try:
@@ -178,7 +177,7 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
         lineEdit_set(self, self.ui.lineEdit_4, math_module_lab2.set_of_minorant(matrix))
 
 
-    def btn2(self):
+    def btn2(self): #активируется при нажатии button_2
         table = self.ui.tableWidget_2
         spinBox_value = self.ui.spinBox_2.value()
         table.setColumnCount(0)
@@ -192,7 +191,7 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
         lineedit_validator_table_added(table, spinBox_value)
 
 
-    def btn4(self):
+    def btn4(self): #активируется при нажатии button_4
         _translate = QtCore.QCoreApplication.translate
         spinBox_value = self.ui.spinBox_2.value()
         table2 = self.ui.tableWidget_2
@@ -243,7 +242,7 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
         table5.sortItems(2, QtCore.Qt.DescendingOrder)
         table5.resizeColumnsToContents()
 
-    def btn5(self):
+    def btn5(self): #активируется при нажатии button_5
         table6 = self.ui.tableWidget_6
         table7 = self.ui.tableWidget_7
         table8 = self.ui.tableWidget_8
@@ -284,7 +283,7 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
         tableWidgetItem.setFlags(flags)
         return tableWidgetItem
 
-    def clear_table(self):
+    def clear_table(self): #очистка таблиц во второй задаче
         self.ui.tableWidget_3.setRowCount(0)
         self.ui.tableWidget_3.setColumnCount(0)
         self.ui.tableWidget_3.clear()

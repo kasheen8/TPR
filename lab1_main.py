@@ -8,7 +8,7 @@ from lab1_form import Ui_MainWindow
 import math_module_lab1
 
 
-def combobox_table_added(table,spinBox_value):
+def combobox_table_added(table,spinBox_value): #добавление компобоксов в таблицу
     for i in range(spinBox_value):
         for j in range(spinBox_value):
             combobox = QtWidgets.QComboBox()
@@ -23,14 +23,14 @@ def combobox_table_added(table,spinBox_value):
             combobox.setFont(font)
             table.setCellWidget(i, j, combobox)
 
-def table_value_get(table,size=5):
+def table_value_get(table,size=5): #записывает значение таблицы из комбобоксов в массив
     table_matrix = np.empty((size,size))
     for i in range(size):
         for j in range(size):
             table_matrix[i][j] = table.cellWidget(i,j).currentText()
     return table_matrix
 
-def table_value_set(self,table_matrix, table, size=5):
+def table_value_set(self,table_matrix, table, size=5): #записывает значение из массива в таблицу
     for row in range(size):
         for column in range(size):
             table.setItem(row,column, QtWidgets.QTableWidgetItem(f'{int(table_matrix[row][column])}'))
@@ -62,7 +62,7 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
 
 
 
-    def btn1(self):
+    def btn1(self): #активируется при нажатии button
         table = self.ui.tableWidget
         spinBox_value = self.ui.spinBox.value()
         table.setColumnCount(0)
@@ -77,7 +77,7 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
 
 
 
-    def combobox1(self, text):
+    def combobox1(self, text): #показ или скрытие второй таблицы в зависимости от операции
         table2 = self.ui.tableWidget_2
         table3 = self.ui.tableWidget_3
         if text == 'Включение' or text == 'Дополнение' or text == 'Обратное'or text == 'Двойственности':
@@ -91,7 +91,7 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
             table3.setEnabled(True)
             table3.show()
 
-    def btn2(self):
+    def btn2(self):  #активируется при нажатии button_2
         table2 = self.ui.tableWidget_2
         table3 = self.ui.tableWidget_3
         table4 = self.ui.tableWidget_4
@@ -115,7 +115,7 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
             result_matrix = math_module_lab1.duality(table2_matrix)
         table_value_set(self, result_matrix, table4)
 
-    def btn3(self):
+    def btn3(self):  #активируется при нажатии button_3
         table5 = self.ui.tableWidget_5
         table5_matrix= np.empty((4,4))
         for i in range(4):
@@ -134,7 +134,7 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
         else:
             self.ui.lineEdit_2.setText('-')
 
-    def btn4(self):
+    def btn4(self):  #активируется при нажатии button_4
         textEdit = self.ui.textEdit
         table6 = self.ui.tableWidget_6
         list_of_checkboxes = [self.ui.checkBox, self.ui.checkBox_2, self.ui.checkBox_3, self.ui.checkBox_4,
@@ -187,7 +187,7 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
         table_value_set(self, result_matrix, table6)
         textEdit.setText('Матрица сгенерирована')
 
-    def clear_textedit(self, qcheckbox, qtextedit):
+    def clear_textedit(self, qcheckbox, qtextedit): #очистка таблицы и тексэдита при изменении значения чекбокса
         self.ui.tableWidget_6.clear()
         qtextedit.clear()
 

@@ -2,7 +2,7 @@
 
 import numpy as np
 
-def set_of_maximum(matrix):
+def set_of_maximum(matrix): #возвращает множество максимумов
     size = len(matrix)
     array_of_maximum = []
     for i in range(size):
@@ -14,7 +14,7 @@ def set_of_maximum(matrix):
             array_of_maximum.append(i+1)
     return array_of_maximum
 
-def set_of_minimum(matrix):
+def set_of_minimum(matrix): #возвращает множество минимумов
     size = len(matrix)
     array_of_minimum = []
     for j in range(size):
@@ -26,7 +26,7 @@ def set_of_minimum(matrix):
             array_of_minimum.append(j + 1)
     return array_of_minimum
 
-def set_of_majorant(matrix):
+def set_of_majorant(matrix): #возвращает множество мажорант
     size = len(matrix)
     array_of_majorant = []
     for j in range(size):
@@ -38,7 +38,7 @@ def set_of_majorant(matrix):
             array_of_majorant.append(j+1)
     return array_of_majorant
 
-def set_of_minorant(matrix):
+def set_of_minorant(matrix): #возвращает множество минорант
     size = len(matrix)
     array_of_minorant = []
     for i in range(size):
@@ -51,7 +51,7 @@ def set_of_minorant(matrix):
     return array_of_minorant
 
 
-def iter_pow_of_order_k(row, pk):
+def iter_pow_of_order_k(row, pk): #возвращает итерационную силу порядка k
     iter_pow = 0
     for num in row:
         if num != '∞':
@@ -59,7 +59,7 @@ def iter_pow_of_order_k(row, pk):
     return iter_pow
 
 
-def object_pow(matrix):
+def object_pow(matrix): #возвращает данные для таблицы сил объектов
     size = len(matrix)
     pow_list = []
     for i in range(size):
@@ -76,7 +76,7 @@ def object_pow(matrix):
         pow_list[i]['iter_pow'] = pow_list[i]['pk'] / iter_pow_sum
     return pow_list
 
-def list_of_outbox(matrix):
+def list_of_outbox(matrix): #возвращает список исходящих сообщений
     size = len(matrix)
     outbox_list = []
     for row in range(size):
@@ -96,7 +96,7 @@ def list_of_outbox(matrix):
     return(outbox_list)
 
 
-def list_of_inbox(matrix):
+def list_of_inbox(matrix): #возвращает список входящих сообщений
     size = len(matrix)
     inbox_list = []
     for j in range(size):
@@ -115,7 +115,7 @@ def list_of_inbox(matrix):
         inbox_list[i]['share'] = inbox_list[i]['sum'] / sum_inbox
     return(inbox_list)
 
-def comb_to_bin(comb_list):
+def comb_to_bin(comb_list): #переводит переменные в двоичные тройки
     size = len(comb_list)
     bin_list = []
     for i in range(size):
@@ -130,7 +130,7 @@ def comb_to_bin(comb_list):
         bin_list.append(elem)
     return bin_list
 
-def bin_result(bin_list):
+def bin_result(bin_list): #возвращает результат в таблице истинности
     if bin_list.count('1') == 0:
         return '0'
     elif bin_list.count('1') == 4:
