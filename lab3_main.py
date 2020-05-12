@@ -90,7 +90,8 @@ class mywindow(QtWidgets.QMainWindow): #класс приложения
         self.ui.label_4.setText(f'Критерий Гурвица является критерием пессимизма - оптимизма.' 
                                 f'За оптимальную принимается та стратегия, для которой выполняется '
                                 f'соотношение: max(si),\nгде si = y min(aij) + (1-y)max(aij))\n'
-                                f'Выбираем из {str(hurf_coef)} максимальный элемент max = {max(hurf_coef)}\n'
+                                f'Выбираем из {str([round(i,3) for i in hurf_coef])} '
+                                f'максимальный элемент max = {round(max(hurf_coef),3)}\n'
                                 f'Вывод: выбираем стратегию N = {hurf_coef.index(max(hurf_coef)) + 1}')
 
 
